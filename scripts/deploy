@@ -1,0 +1,41 @@
+#!/bin/bash
+
+USER=jboss
+PASSWORD=cigna123
+HOST=localhost
+REMOTE_PATH=/home/jboss
+APP_PATH=../build/libs/adelaCourseManager-2015.99.0.0-SNAPSHOT.war
+
+while getopts ":a:u:p:h:r:" opt; do
+   case $opt in
+      a)
+         APP_PATH
+         ;;
+      u)
+         USER=$OPTARG
+         ;;
+      p)
+         PASSWORD=$OPTARG
+         ;;
+      h)
+         HOST=$OPTARG
+         ;;
+      r)
+         REMOTE_PATH=$OPTARG
+         ;;
+      \?)
+         echo "Invalid option: -$OPTARG" >&2
+         ;;
+      :)
+         echo "Option -$OPTARG requires an argument." >&2
+         ;;
+   esac
+done
+
+exp $PASSWORD scp $APP_PATH $USER@$HOST:$REMOTE_PATH
+exp $PASSWORD scp run $USER@$HOST:$REMOTE_PATH
+exp $PASSWORD ssh $USER@$HOST "chmod +x $REMOTE_PATH/run"
+exp $PASSWORD ssh $USER@$HOST "/home/jboss/run restart"
+exit 0
+
+
