@@ -8,6 +8,7 @@ import org.adela.is.awesome.coursemanager.persistence.entity.TeacherEntity;
 import org.adela.is.awesome.coursemanager.persistence.repository.TeacherEntityRepository;
 import org.adela.is.awesome.coursemanager.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,12 @@ public class TeacherService {
 	@RequestMapping(method=RequestMethod.PUT)
 	public Long saveExisting(@RequestBody TeacherEntity entity){
 		return teacherEntityRepository.save(entity).getTeacherEntityId();
+	}
+
+	@Timed
+	@RequestMapping(value="{teacherId}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable Long teacherId){
+		teacherEntityRepository.delete(teacherId);
 	}
 
 	@Timed
