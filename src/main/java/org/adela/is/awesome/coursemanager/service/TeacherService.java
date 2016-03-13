@@ -4,18 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.adela.is.awesome.coursemanager.persistence.entity.TeacherEntity;
+import org.adela.is.awesome.coursemanager.persistence.repository.TeacherEntityRepository;
+import org.adela.is.awesome.coursemanager.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.adela.is.awesome.coursemanager.service.resource.Teacher;
-import java.util.ArrayList;
-import org.adela.is.awesome.coursemanager.service.mapping.TeacherEntityToTeacherMapper;
-import org.adela.is.awesome.coursemanager.persistence.entity.TeacherEntity;
-import org.adela.is.awesome.coursemanager.persistence.repository.TeacherEntityRepository;
-import org.adela.is.awesome.coursemanager.util.CollectionUtils;
 import com.codahale.metrics.annotation.Timed;
 
 @RestController
@@ -27,34 +24,22 @@ public class TeacherService {
 	
 	@Timed
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Teacher> findAll(){
+	public List<TeacherEntity> findAll(){
 		List<TeacherEntity> entities = CollectionUtils.toList(teacherEntityRepository.findAll());
-		TeacherEntityToTeacherMapper mapper = TeacherEntityToTeacherMapper.INSTANCE; 
-		List<Teacher> resources = new ArrayList<>();
-		for(TeacherEntity entity:entities){
-			resources.add(mapper.teacherEntityToTeacher(entity));
-		}
-		return resources;
+		return entities;
 	}
 	
 	@Timed
 	@RequestMapping(method=RequestMethod.POST)
-	public Long saveNew(@RequestBody Teacher resource){
-		return this.save(resource, new TeacherEntity());
+	public Long saveNew(@RequestBody TeacherEntity entity){
+		return teacherEntityRepository.save(entity).getTeacherEntityId();
 	}
 	
 	@Timed
 	@RequestMapping(method=RequestMethod.PUT)
-	public Long saveExisting(@RequestBody Teacher resource){
-		TeacherEntity entity = teacherEntityRepository.findOne(resource.getTeacherId());
-		return this.save(resource, entity);
-	}
-
-	private Long save(Teacher resource, TeacherEntity entity){
-		TeacherEntityToTeacherMapper mapper = TeacherEntityToTeacherMapper.INSTANCE; 
-		mapper.teacherToTeacherEntity(resource, entity);
+	public Long saveExisting(@RequestBody TeacherEntity entity){
 		return teacherEntityRepository.save(entity).getTeacherEntityId();
-	} 
+	}
 
 	@Timed
 	@RequestMapping(value="ping",method=RequestMethod.GET)

@@ -5,11 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.Type;
-
-
-
-
 @Entity
 public class TeacherEntity {
 	private Long teacherEntityId;
