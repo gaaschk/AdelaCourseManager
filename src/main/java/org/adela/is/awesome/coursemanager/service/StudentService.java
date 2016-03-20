@@ -8,6 +8,7 @@ import org.adela.is.awesome.coursemanager.persistence.entity.StudentEntity;
 import org.adela.is.awesome.coursemanager.persistence.repository.StudentEntityRepository;
 import org.adela.is.awesome.coursemanager.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,5 +48,18 @@ public class StudentService {
 		Map<String,Object> status = new HashMap<>();
 		status.put("status", "ok");
 		return status;
+	}
+	
+	@Timed
+	@RequestMapping(value = "{studentId}", method = RequestMethod.GET)
+	public StudentEntity findOne(@PathVariable Long studentId) {
+		return studentEntityRepository.findOne(studentId);
+		
+	}
+	
+	@Timed
+	@RequestMapping(value = "{studentId}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long studentId) {
+		studentEntityRepository.delete(studentId);
 	}
 }

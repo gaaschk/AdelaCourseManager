@@ -52,6 +52,7 @@ dependencyManagement {
   compile{
 	imports {
 		mavenBom "io.spring.platform:platform-bom:${springIOVersion}"
+		mavenBom "com.vaadin:vaadin-bom:+"
 	}
   }
 }
@@ -69,7 +70,9 @@ dependencies {
 	//database
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("com.h2database:h2")
-
+	//vaadin
+	compile("com.vaadin:vaadin-spring-boot-starter:+")
+	
 	testCompile "org.springframework.boot:spring-boot-starter-test"
 	testCompile "com.jayway.jsonpath:json-path"
 }

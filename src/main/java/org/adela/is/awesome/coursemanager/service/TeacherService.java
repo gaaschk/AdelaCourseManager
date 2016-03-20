@@ -19,40 +19,48 @@ import com.codahale.metrics.annotation.Timed;
 @RestController
 @RequestMapping("/teacher")
 public class TeacherService {
-	
+
 	@Autowired
 	private TeacherEntityRepository teacherEntityRepository;
-	
+
 	@Timed
-	@RequestMapping(method=RequestMethod.GET)
-	public List<TeacherEntity> findAll(){
-		List<TeacherEntity> entities = CollectionUtils.toList(teacherEntityRepository.findAll());
+	@RequestMapping(method = RequestMethod.GET)
+	public List<TeacherEntity> findAll() {
+		List<TeacherEntity> entities = CollectionUtils
+				.toList(teacherEntityRepository.findAll());
 		return entities;
 	}
-	
+
 	@Timed
-	@RequestMapping(method=RequestMethod.POST)
-	public Long saveNew(@RequestBody TeacherEntity entity){
-		return teacherEntityRepository.save(entity).getTeacherEntityId();
-	}
-	
-	@Timed
-	@RequestMapping(method=RequestMethod.PUT)
-	public Long saveExisting(@RequestBody TeacherEntity entity){
+	@RequestMapping(method = RequestMethod.POST)
+	public Long saveNew(@RequestBody TeacherEntity entity) {
 		return teacherEntityRepository.save(entity).getTeacherEntityId();
 	}
 
 	@Timed
-	@RequestMapping(value="{teacherId}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable Long teacherId){
+	@RequestMapping(method = RequestMethod.PUT)
+	public Long saveExisting(@RequestBody TeacherEntity entity) {
+		return teacherEntityRepository.save(entity).getTeacherEntityId();
+	}
+
+	@Timed
+	@RequestMapping(value = "{teacherId}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long teacherId) {
 		teacherEntityRepository.delete(teacherId);
 	}
 
 	@Timed
-	@RequestMapping(value="ping",method=RequestMethod.GET)
-	public Map<String,Object> ping(){
-		Map<String,Object> status = new HashMap<>();
+	@RequestMapping(value = "ping", method = RequestMethod.GET)
+	public Map<String, Object> ping() {
+		Map<String, Object> status = new HashMap<>();
 		status.put("status", "ok");
 		return status;
+	}
+
+	@Timed
+	@RequestMapping(value = "{teacherId}", method = RequestMethod.GET)
+	public TeacherEntity findOne(@PathVariable Long teacherId) {
+		return teacherEntityRepository.findOne(teacherId);
+		
 	}
 }
