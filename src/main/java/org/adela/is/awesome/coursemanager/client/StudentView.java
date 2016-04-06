@@ -1,15 +1,11 @@
 package org.adela.is.awesome.coursemanager.client;
 
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.VerticalLayout;
 
-public class StudentView extends VerticalLayout implements View {
+public class StudentView extends VerticalLayout{
+	private static final long serialVersionUID = -2113437146028895009L;
 
-	
-	
-	@Override
-	public void enter(ViewChangeEvent event) {
+	public StudentView(){
+		
 	}
-
 }
