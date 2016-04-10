@@ -35,7 +35,7 @@ public class HomePage extends UI {
 		//content.setSizeFull();
 		this.setContent(content);
 		
-		Label headerLabel = new Label("Adela is Awesome!");
+		Label headerLabel = new Label("Adela is an Angry Bunny!");
 		headerLabel.setStyleName("headerLabel");
 		content.addComponent(headerLabel);
 		
