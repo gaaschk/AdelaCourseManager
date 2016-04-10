@@ -1,0 +1,15 @@
+@import "../runo/runo.scss";
+
+@mixin adelaTheme{
+	@include runo;
+	
+	.headerLabel{
+   		height: 100px;
+    	font-size: 90px;
+    	line-height: 100px;
+    	text-align: center;
+    	font-family: fantasy;
+    	padding-top: 35px;
+   	}
+	
+}
