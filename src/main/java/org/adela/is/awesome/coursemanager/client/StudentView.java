@@ -50,7 +50,7 @@ public class StudentView extends HorizontalSplitPanel{
 			@Override
 			public void buttonClick(ClickEvent event) {
 				StudentEntity newStudent = new StudentEntity();
-				newStudent.setStudentName("");
+				newStudent.setStudentName("aName");
 				newStudent = studentRepo.save(newStudent);
 				reloadTableData();
 			}}));
