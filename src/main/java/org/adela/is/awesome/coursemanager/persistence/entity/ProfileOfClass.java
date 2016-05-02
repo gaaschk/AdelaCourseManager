@@ -27,5 +27,4 @@ public class ProfileOfClass {
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
-
 }

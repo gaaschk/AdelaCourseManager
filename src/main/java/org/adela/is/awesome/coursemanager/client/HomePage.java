@@ -40,7 +40,7 @@ public class HomePage extends UI {
 		HorizontalLayout headerPanel = new HorizontalLayout();
 		Image bunnyImage = new Image(null, new ThemeResource("img/angry-bunny.jpg"));
 		headerPanel.addComponent(bunnyImage);
-		Label headerLabel = new Label("Adela is an Angry Bunny!");
+		Label headerLabel = new Label("Voi termina aplicatia pana pe 15 mai!");
 		headerLabel.setStyleName("headerLabel");
 		headerPanel.addComponent(headerLabel);
 		content.addComponent(headerPanel);

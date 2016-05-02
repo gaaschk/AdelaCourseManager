@@ -1,16 +1,19 @@
 package org.adela.is.awesome.coursemanager.persistence.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Course {
 	
 	private Long courseEntityId;
 	private String courseName;
-	
+	private List<TeacherEntity> teachers;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getCourseEntityId() {
@@ -24,6 +27,13 @@ public class Course {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	@OneToMany
+	public List<TeacherEntity> getTeachers() {
+		return teachers;
+	}
+	public void setTeachers(List<TeacherEntity> teachers) {
+		this.teachers = teachers;
 	} 
 
 }

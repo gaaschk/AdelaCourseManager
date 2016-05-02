@@ -12,31 +12,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 
-@RestController
-@RequestMapping("/gradebook")
-public class GradeBookService {
+public class GradeBoookService {
 	@Autowired
 	private GradeBookRepository gradeBookRepository;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Long saveCourse(@RequestBody GradeBook gb) {
-		return gradeBookRepository.save(gb).getGradeBookEntityId();
+	public Long saveGrade(@RequestBody GradeBook gb) {
+		return gradeBookRepository.save(gb).getIdGradeBook();
 
 	}
 
+	//per student, not all
 	@RequestMapping(method = RequestMethod.GET)
-	public List<GradeBook> findAllCourses() {
+	public List<GradeBook> findAllgrades() {
 		return CollectionUtils.toList(gradeBookRepository.findAll());
 	}
 
 	@Timed
 	@RequestMapping(method = RequestMethod.PUT)
 	public Long saveExisting(@RequestBody GradeBook entity) {
-		return gradeBookRepository.save(entity).getGradeBookEntityId();
+		return gradeBookRepository.save(entity).getIdGradeBook();
 	}
 
 	@Timed
@@ -46,17 +44,21 @@ public class GradeBookService {
 		status.put("status", "ok");
 		return status;
 	}
-
+	
+//get one for a student
 	@Timed
-	@RequestMapping(value = "{gradeBookEntityId}", method = RequestMethod.GET)
-	public GradeBook findOne(@PathVariable Long gradeBookEntityId) {
-		return gradeBookRepository.findOne(gradeBookEntityId);
+	@RequestMapping(value = "{idGradeBook}", method = RequestMethod.GET)
+	public GradeBook findOne(@PathVariable Long idGradeBook) {
+		return gradeBookRepository.findOne(idGradeBook);
 
 	}
 
+	//delete one for a student
 	@Timed
-	@RequestMapping(value = "{gradeBookEntityId}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable Long gradeBookEntityId) {
-		gradeBookRepository.delete(gradeBookEntityId);
+	@RequestMapping(value = "{idGradeBook}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long idGradeBook) {
+		gradeBookRepository.delete(idGradeBook);
 	}
+	
+	
 }

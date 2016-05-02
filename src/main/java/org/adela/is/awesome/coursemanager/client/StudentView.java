@@ -67,7 +67,7 @@ public class StudentView extends HorizontalSplitPanel{
 		this.addComponent(tablePanel);
 		VerticalLayout formPanel = new VerticalLayout();
 		GridLayout formDataPanel = new GridLayout(2,1);
-		formDataPanel.addComponent(new Label("Strudent Name:"),0,0);
+		formDataPanel.addComponent(new Label("Student Name:"),0,0);
 		formDataPanel.addComponent(nameField,1,0);
 		formPanel.addComponent(formDataPanel);
 		Button saveButton = new Button("Save", new ClickListener() {

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class StudentEntity {
 	private Long studentEntityId;
 	private String studentName; 
+	private Integer registerYear;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,4 +26,11 @@ public class StudentEntity {
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
+	public Integer getRegisterYear() {
+		return registerYear;
+	}
+	public void setRegisterYear(Integer registerYear) {
+		this.registerYear = registerYear;
+	}
+	
 }
